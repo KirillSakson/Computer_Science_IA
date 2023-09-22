@@ -1,0 +1,46 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+	Board games library
+{% endblock %}
+
+{% block navbar %}
+	<style>
+        .tab {
+            display: inline-block;
+            margin-left: 40px;
+        }
+    </style>
+	<nav class="navbar navbar-default">
+		<a href="/">Home<span class="tab"></span></a>
+		{% if current_user.is_authenticated %}
+			<a href="#">Hello, {{ current_user.username }}!<span class="tab"></span></a>
+			<a href="/favourite">Favourite<span class="tab"></span></a>
+			<a href="/bestranked">Best ranked<span class="tab"></span></a>
+			<a href="/mygames">My games<span class="tab"></span></a>
+			<a href="/account">My account<span class="tab"></span></a>
+			<a href="/logout">Log out</a>
+		{% else %}
+			<a href="/login">Log in<span class="tab"></span></a>
+			<a href="/registration">Registration</a>
+		{% endif %}
+	</nav>
+
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+
+		{% with messages = get_flashed_messages(with_categories=true) %}
+        	{% if messages %}
+            	{% for category, message in messages %}
+                	<div class="alert alert-{{ category }}">{{message}}</div>
+            	{% endfor %}
+        	{% endif %}
+    	{% endwith %}
+
+		{% block app_content %}
+
+		{% endblock %}
+	</div>
+{% endblock %}
