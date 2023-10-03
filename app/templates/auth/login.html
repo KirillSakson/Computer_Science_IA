@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-</body>
-</html>
+{% block app_content %}
+    <div style="width: 30%">
+        {{ wtf.quick_form(form) }}
+    </div>
+
+    <p>Новый пользователь? <a href="{{ url_for('registration') }}">Нажмите для регистрации!</a></p>
+{% endblock %}

@@ -12,10 +12,15 @@ bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login_manager = LoginManager(app)
+login_manager.login_view = "login"
 
 
-from app.controllers import home_controller, auth_controller
+from app.controllers.home_controller import *
+from app.controllers import auth_controller
+from app.models.boardgame import *
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
