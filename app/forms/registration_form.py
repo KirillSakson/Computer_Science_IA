@@ -5,6 +5,7 @@ from app.models.user import User
 
 
 class RegistrationForm(FlaskForm):
+    name = StringField("Name", validators=[DataRequired()])
     username = StringField("Username", validators=[DataRequired()])
     email = StringField("E-mail", validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired()])
