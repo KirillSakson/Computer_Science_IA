@@ -19,7 +19,7 @@ def registration():
         db.session.commit()
         flash("Congratulations, you've just registered successfully!", "success")
         return redirect(url_for("login"))
-    return render_template("auth/registration.html", title="Регистрация", form=form)
+    return render_template("auth/registration.html", title="Registration", form=form)
 
 
 @app.route("/login/", methods=["get", "post"])
@@ -49,7 +49,6 @@ def logout():
 
 
 @app.route("/account/")
-@app.route("/home/account/")
 @login_required
 def account():
     return render_template("home/account.html")
@@ -64,10 +63,10 @@ def edit():
         current_user.email = form.email.data
         current_user.set_password(form.password.data)
         db.session.commit()
-        flash("Поздравляем, вы успешно изменили свой профиль", "success")
+        flash("Congratulations, you've just edited your account data successfully!", "success")
         logout_user()
         return redirect(url_for("login"))
     elif request.method == "GET":
         form.username.data = current_user.username
         form.email.data = current_user.email
-    return render_template("auth/edit.html", title="Изменение данных", form=form)
+    return render_template("auth/edit.html", title="Editing account data", form=form)

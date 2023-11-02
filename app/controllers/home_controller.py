@@ -4,8 +4,14 @@ from flask_login import login_required
 
 
 @app.route("/")
+def about():
+    return render_template("about.html")
+
+
+@app.route("/home")
+@login_required
 def home():
-    return render_template("home/index.html")
+    return render_template("home/home.html")
 
 
 @app.route("/favourite/")
