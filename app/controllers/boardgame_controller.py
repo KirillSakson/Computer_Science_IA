@@ -17,7 +17,7 @@ def add_boardgame():
         db.session.commit()
         flash("Congratulations, you've just added a new boardgame successfully!", "success")
         return redirect(url_for("home"))
-    return render_template("boardgames_form/addboardgame.html", title="Adding new boardgame", form=form)
+    return render_template("boardgames_forms/addboardgame.html", title="Adding new boardgame", form=form)
 
 
 @app.route("/edit_boardgame/<int:boardgame_id>", methods=["get", "post"])
@@ -38,4 +38,4 @@ def edit_boardgame(boardgame_id):
         form.min_players.data = boardgame.min_players
         form.max_players.data = boardgame.max_players
         form.description.data = boardgame.description
-    return render_template("boardgame_forms/editboardgame.html", title="Editing boardgame information", form=form)
+    return render_template("boardgames_forms/editboardgame.html", title="Editing boardgame information", form=form)

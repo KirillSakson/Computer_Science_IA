@@ -24,3 +24,9 @@ def favourite():
 @login_required
 def bestranked():
     return render_template("home/bestranked.html")
+
+
+@app.route("/search")
+@login_required
+def search():
+    pass

@@ -15,6 +15,9 @@ class BoardGame(db.Model):
     min_players = db.Column(db.Integer())
     max_players = db.Column(db.Integer())
     description = db.Column(db.String(), nullable=False)
-    rank = db.Column(db.Integer())
-    votes = db.Column(db.Integer())
+    rank = db.Column(db.Integer(), default=0)
+    votes = db.Column(db.Integer(), default=0)
     users = db.relationship("User", secondary=user_boardgames, backref="boardgames")  # for favourite boardgames
+
+    def get_rank(self):
+        return round(self.rank/self.votes, 1) if self.votes != 0 else 0

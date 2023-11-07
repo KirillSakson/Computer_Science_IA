@@ -12,7 +12,7 @@ class AddBoardgameForm(FlaskForm):
     submit = SubmitField("Done!")
 
     def validate_ranking(self, ranking):
-        if not 1 <= ranking <= 5:
+        if not 1 <= ranking.data <= 5:
             raise ValidationError("Rate the game in range between 1 and 5")
 
 

@@ -1,47 +1,100 @@
-{% extends 'bootstrap/base.html' %}
+{% from "bootstrap5/utils.html" import render_messages %}
+{% from "bootstrap5/form.html" import render_form %}
 
-{% block title %}
-	Board games library
-{% endblock %}
 
-{% block navbar %}
-	<style>
-        .tab {
-            display: inline-block;
-            margin-left: 40px;
-        }
-    </style>
-	<nav class="navbar navbar-default">
-		{% if current_user.is_authenticated %}
-			<a href="/">Hello, {{ current_user.username }}!<span class="tab"></span></a>
-			<a href="/home">Home<span class="tab"></span></a>
-			<a href="/favourite">Favourite<span class="tab"></span></a>
-			<a href="/bestranked">Best ranked<span class="tab"></span></a>
-			<a href="/mygames">My games<span class="tab"></span></a>
-			<a href="/account">My account<span class="tab"></span></a>
-			<a href="/logout">Log out</a>
-		{% else %}
-			<a href="/">About us<span class="tab"></span></a>
-			<a href="/login">Log in<span class="tab"></span></a>
-			<a href="/registration">Registration</a>
-		{% endif %}
-	</nav>
+<!DOCTYPE html>
+<html lang="en">
 
-{% endblock %}
+	<head>
+		{% block head %}
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% block content %}
-	<div class="container">
+			{% block styles %}
+				{{ bootstrap.load_css() }}
+			{% endblock %}
 
-		{% with messages = get_flashed_messages(with_categories=true) %}
-        	{% if messages %}
-            	{% for category, message in messages %}
-                	<div class="alert alert-{{ category }}">{{message}}</div>
-            	{% endfor %}
-        	{% endif %}
-    	{% endwith %}
-
-		{% block app_content %}
-
+			{% block title %}
+				<title>Boardgames Library</title>
+			{% endblock %}
 		{% endblock %}
-	</div>
-{% endblock %}
+	</head>
+
+	<body>
+		{% block navbar %}
+			<nav class="navbar navbar-expand-lg bg-body-tertiary">
+				{% if current_user.is_authenticated %}
+					<div class="container-fluid">
+						<a class="navbar-brand" href="/">Hello, {{ current_user.username }}!</a>
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      						<span class="navbar-toggler-icon"></span>
+    					</button>
+
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+								<li class="nav-item">
+									<a class="nav-link active" aria-current="page" href="/home">Home</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link active" aria-current="page" href="/favourite">Favourite</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link active" aria-current="page" href="/bestranked">Best ranked</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link active" aria-current="page" href="/mygames">My games</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link active" aria-current="page" href="/account">My account</a>
+								</li>
+							</ul>
+							<form class="d-flex" role="search" action="/search" method="get">
+								<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
+							</form>
+							<ul class="navbar-nav">
+								<li class="nav-item">
+									<a class="nav-link active" aria-current="page" href="/logout">Log out</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				{% else %}
+					<div class="container-fluid">
+						<a class="navbar-brand" href="/">About us</a>
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent2">
+							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+								<li class="nav-item">
+									<a class="nav-link active" aria-current="page" href="/login">Log in</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link active" aria-current="page" href="/registration">Registration</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				{% endif %}
+			</nav>
+		{% endblock %}
+
+		{% block content %}
+			<div class="container">
+
+				{{ render_messages() }}
+
+				{% block app_content %}
+
+				{% endblock %}
+
+			</div>
+		{% endblock %}
+
+		{% block scripts %}
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+	</body>
+
+</html>
