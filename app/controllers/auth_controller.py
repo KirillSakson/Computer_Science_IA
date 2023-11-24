@@ -65,7 +65,7 @@ def edit():
         db.session.commit()
         flash("Congratulations, you've just edited your account data successfully!", "success")
         logout_user()
-        return redirect(url_for("login"))
+        return redirect(url_for("account"))
     elif request.method == "GET":
         form.username.data = current_user.username
         form.email.data = current_user.email

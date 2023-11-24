@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
-{% block app_content %}
-    <div style="width: 30%">
-        {{ render_form(form) }}
+{% block content %}
+    <div style="margin-top: 140px; justify-content: center;">
+        {{ render_messages() }}
+        <div style="width: 20%; margin-left: auto; margin-right: auto">
+            {{ render_form(form) }}
+        </div>
     </div>
 {% endblock %}

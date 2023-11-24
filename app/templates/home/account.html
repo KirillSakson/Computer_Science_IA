@@ -1,11 +1,22 @@
 {% extends "base.html" %}
 
-{% block app_content %}
-    <h1>My account</h1>
-    <h2>Your login</h2>
-    <h4>{{current_user.username}}</h4>
-    <h2>Your e-mail</h2>
-    <h4>{{current_user.email}}</h4>
+{% block content %}
+    <div style="text-align: center;">
+        {{ render_messages() }}
+    </div>
+    <div style="margin-top: 150px; justify-content: center; width: 20%; margin-left: auto; margin-right: auto; text-align: center">
+        <h1>My account</h1>
+        <p></p>
+        <p></p>
+        <h2>Your login:</h2>
+        <h4>{{current_user.username}}</h4>
 
-    <a href="{{ url_for('edit') }}">Edit your profile</a>
+        <h2>Your e-mail:</h2>
+        <h4>{{current_user.email}}</h4>
+        <p></p>
+
+        <div style="padding: 0.7rem">
+            <a class="btn btn-outline-primary text-center" href="{{ url_for('edit') }}">Edit your profile</a>
+        </div>
+    </div>
 {% endblock %}

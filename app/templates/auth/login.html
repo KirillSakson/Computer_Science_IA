@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 
-{% block app_content %}
-    <div style="width: 30%">
-        {{ render_form(form) }}
+{% block content %}
+    <div style="text-align: center;">
+        {{ render_messages() }}
     </div>
-
-    <p>Новый пользователь? <a href="{{ url_for('registration') }}">Нажмите для регистрации!</a></p>
+    <div style="margin-top: 200px; justify-content: center;">
+        <div style="width: 20%; margin-left: auto; margin-right: auto">
+            {{ render_form(form) }}
+            <p></p>
+            <p>New user? <a href="{{ url_for('registration') }}">Press to sign in!</a></p>
+        </div>
+    </div>
 {% endblock %}

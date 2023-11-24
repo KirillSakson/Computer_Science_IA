@@ -1,6 +1,37 @@
 {% extends "base.html" %}
+{% from "macros.html" import represent_bg %}
 
 {% block app_content %}
-    <h1>Home</h1>
-    <a href="/add_boardgame">Add new boardgame</a>
+
+        <div class="row">
+            <div class="col-md-2 offset-md-5">
+                <h1 class="text-end">Home</h1>
+            </div>
+            <div class="col-md-2 offset-md-3" style="padding: 0.7rem">
+                <a class="btn btn-outline-primary text-center" href="/add_boardgame">Add new boardgame</a>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 offset-md-1">
+                    <h3>All boardgames</h3>
+                </div>
+                <div class="col-md-3 offset-md-1">
+                    <h3 class="text-center">Favourite boardgames</h3>
+                </div>
+                <div class="col-md-2 offset-md-2">
+                    <h3 class="text-center">My games</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            {% for bg in bgs1 %}
+                <div class="card col-md-3" style="width: 24rem;">
+                    {{ represent_bg(bg) }}
+                </div>
+                <p></p>
+            {% endfor %}
+        </div>
 {% endblock %}

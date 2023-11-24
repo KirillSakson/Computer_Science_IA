@@ -17,10 +17,10 @@ def add_boardgame():
         db.session.commit()
         flash("Congratulations, you've just added a new boardgame successfully!", "success")
         return redirect(url_for("home"))
-    return render_template("boardgames_forms/addboardgame.html", title="Adding new boardgame", form=form)
+    return render_template("boardgames/addboardgame.html", title="Adding new boardgame", form=form)
 
 
-@app.route("/edit_boardgame/<int:boardgame_id>", methods=["get", "post"])
+@app.route("/edit_boardgame/<int:boardgame_id>/", methods=["get", "post"])
 @login_required
 def edit_boardgame(boardgame_id):
     boardgame = BoardGame.query.get(boardgame_id)
@@ -38,4 +38,14 @@ def edit_boardgame(boardgame_id):
         form.min_players.data = boardgame.min_players
         form.max_players.data = boardgame.max_players
         form.description.data = boardgame.description
-    return render_template("boardgames_forms/editboardgame.html", title="Editing boardgame information", form=form)
+    return render_template("boardgames/editboardgame.html", title="Editing boardgame information", form=form)
+
+
+@app.route("/boardgame_profile/<int:boardgame_id>/")
+@login_required
+def boardgame_profile(boardgame_id):
+    boardgame = BoardGame.query.get(boardgame_id)
+    if boardgame is None:
+        flash("Boardgame not found", "danger")
+        return redirect(url_for("home"))
+    return render_template("boardgames/profile.html", bg=boardgame)
