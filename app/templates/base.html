@@ -36,13 +36,13 @@
 									<a class="nav-link active" aria-current="page" href="/home">Home</a>
 								</li>
 								<li class="nav-item">
+									<a class="nav-link active" aria-current="page" href="/all_boardgames">All boardgames</a>
+								</li>
+								<li class="nav-item">
 									<a class="nav-link active" aria-current="page" href="/favourite">Favourite</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link active" aria-current="page" href="/bestranked">Best ranked</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link active" aria-current="page" href="/mygames">My games</a>
+									<a class="nav-link active" aria-current="page" href="/my_boardgames">My boardgames</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link active" aria-current="page" href="/account">My account</a>
@@ -82,8 +82,9 @@
 
 		{% block content %}
 			<div class="container">
-
-				{{ render_messages() }}
+				<div style="text-align: center">
+					{{ render_messages() }}
+				</div>
 
 				{% block app_content %}
 

@@ -1,7 +1,26 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <div>
-        <p>Hi!</p>
+    <div style="margin-top: 50px">
+        <h1 style="text-align: center">{{bg.name}}</h1>
+        <h4>Players:</h4>
+        <p class="fs-5">{{bg.min_players}}-{{bg.max_players}} people</p>
+        <h4>Short boardgame's description:</h4>
+        <p class="fs-5">{{bg.description}}</p>
+        <h4>Full boardgame's description and its rules</h4>
+        {% for line in fd %}
+            <p class="fs-5 lh-1">{{line}}</p>
+        {% endfor %}
+        <h4>Rank:</h4>
+        <p class="fs-5">{{bg.rank/bg.votes|round(1)}}</p>
+        {% if bg not in current_user.favourite_boardgames %}
+            <a class="btn btn-outline-success text-center" href="/add_to_favourite/{{bg.id}}">Add to favourite</a>
+        {% else %}
+            <a class="btn btn-outline-danger text-center" href="/remove_from_favourite/{{bg.id}}">Remove from favourite</a>
+        {% endif %}
+        <p></p>
+        {% if bg.author == current_user %}
+            <a class="btn btn-outline-primary text-center" href="/edit_boardgame/{{bg.id}}">Edit boardgame's profile information</a>
+        {% endif %}
     </div>
 {% endblock %}

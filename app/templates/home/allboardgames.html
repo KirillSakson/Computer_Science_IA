@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% from "macros.html" import show_bgs %}
+
+{% block app_content %}
+    <div class="row" style="margin-top: 10px">
+        <div class="col-md-3 offset-md-4">
+            <h1 class="text-center">All boardgames</h1>
+        </div>
+        <div class="col-md-2 offset-md-3" style="padding: 0.7rem">
+            <a class="btn btn-outline-primary text-center" href="/add_boardgame">Add new boardgame</a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px; display: flex; justify-content: space-around; align-items: center">
+        <div class="col-md-4">
+            <p class="fs-4 text-center">How do you want to order the boardgames?</p>
+        </div>
+        <div class="col-md-2 offset-md-1">
+            <a class="btn btn-primary text-center" href="/all_boardgames/?order=name">Name</a>
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-primary text-center" href="/all_boardgames/?order=date">Recency</a>
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-primary text-center" href="/all_boardgames/?order=rank">Rank</a>
+        </div>
+    </div>
+    {{ show_bgs(boardgames) }}
+{% endblock %}
