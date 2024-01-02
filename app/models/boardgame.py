@@ -17,11 +17,16 @@ class BoardGame(db.Model):
     max_players = db.Column(db.Integer)
     description = db.Column(db.String(100), nullable=False)
     full_description = db.Column(db.Text, nullable=False)
-    rank = db.Column(db.Integer, default=0)
-    votes = db.Column(db.Integer, default=0)
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
     users = db.relationship("User", secondary=user_boardgames, backref="favourite_boardgames")  # for favourite boardgames
+    ranking_users = db.relationship("Ranking", backref="boardgames")
 
     def get_rank(self):
-        return round(self.rank/self.votes, 1) if self.votes != 0 else 0
+        sum, n = 0, 0
+        for r in self.rankings:
+            sum += r.rank
+            n += 1
+        if n == 0:
+            return 0
+        return round(sum/n, 1)

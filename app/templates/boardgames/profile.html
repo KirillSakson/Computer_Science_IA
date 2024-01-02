@@ -12,7 +12,7 @@
             <p class="fs-5 lh-1">{{line}}</p>
         {% endfor %}
         <h4>Rank:</h4>
-        <p class="fs-5">{{bg.rank/bg.votes|round(1)}}</p>
+        <p class="fs-5">{{bg.get_rank()}}</p>
         {% if bg not in current_user.favourite_boardgames %}
             <a class="btn btn-outline-success text-center" href="/add_to_favourite/{{bg.id}}">Add to favourite</a>
         {% else %}
@@ -22,5 +22,22 @@
         {% if bg.author == current_user %}
             <a class="btn btn-outline-primary text-center" href="/edit_boardgame/{{bg.id}}">Edit boardgame's profile information</a>
         {% endif %}
+        <p></p>
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="ranking" class="col-form-label">Password</label>
+            </div>
+            <div class="col-auto">
+                <form action="/rank_boardgame/" method="post">
+                    <input type="hidden" name="bg_id" value="{{bg.id}}">
+                    <input type="number" max="5" min="1" id="ranking" class="form-control" aria-describedby="ranking_form" name="rank">
+                </form>
+            </div>
+            <div class="col-auto">
+                <span id="ranking_form" class="form-text">
+                    Only 1-5 values are accepted!
+                </span>
+            </div>
+        </div>
     </div>
 {% endblock %}

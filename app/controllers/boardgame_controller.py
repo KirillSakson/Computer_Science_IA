@@ -3,6 +3,7 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from app.models.boardgame import BoardGame
 from app.forms.boardgame_forms import AddBoardgameForm, EditBoardgameForm
+from app.models.ranking import Ranking
 
 
 @app.route("/add_boardgame/", methods=["post", "get"])
@@ -12,9 +13,11 @@ def add_boardgame():
     if form.validate_on_submit():
         boardgame = BoardGame(name=form.name.data, user_id=current_user.id, min_players=form.min_players.data,
                               max_players=form.max_players.data, description=form.description.data,
-                              full_description=form.full_description.data, rank=form.ranking.data, votes=1)
-        print(form.full_description.data)
+                              full_description=form.full_description.data)
         db.session.add(boardgame)
+        db.session.commit()
+        ranking = Ranking(user_id=current_user.id, boardgame_id=boardgame.id, rank=form.ranking.data)
+        db.session.add(ranking)
         db.session.commit()
         flash("Congratulations, you've just added a new boardgame successfully!", "success")
         return redirect(url_for("home"))
@@ -82,4 +85,21 @@ def remove_from_favourite(bg_id):
     current_user.favourite_boardgames.remove(bg)
     db.session.commit()
     flash("Boardgame removed from favourite successfully", "success")
+    return redirect(url_for("boardgame_profile", boardgame_id=bg_id))
+
+
+@app.route("/rank_boardgame/", methods=["post"])
+@login_required
+def rank_boardgame():
+    mark, bg_id = request.form.get("rank"), request.form.get("bg_id")
+    bg = BoardGame.query.get(bg_id)
+    for line in bg.ranking_users:
+        if line.user_id == current_user.id:
+            line.rank = mark
+            db.session.commit()
+            break
+    else:
+        ranking = Ranking(user_id=current_user.id, boardgame_id=bg_id, rank=mark)
+        db.session.add(ranking)
+        db.session.commit()
     return redirect(url_for("boardgame_profile", boardgame_id=bg_id))

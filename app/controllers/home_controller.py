@@ -52,7 +52,8 @@ def all_boardgames():
     elif order_query == "date":
         bgs = BoardGame.query.order_by(BoardGame.updated_on).all()
     elif order_query == "rank":
-        bgs = BoardGame.query.order_by(db.desc(BoardGame.rank / BoardGame.votes)).all()
+        bgs = BoardGame.query.all()
+        bgs = sorted(bgs, key=lambda bg: bg.get_rank(), reverse=True)
     else:
         bgs = BoardGame.query.all()
     boardgames = split_list(bgs)

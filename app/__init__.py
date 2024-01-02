@@ -18,6 +18,7 @@ login_manager.login_view = "login"
 from app.controllers.home_controller import *
 from app.controllers import auth_controller, boardgame_controller
 from app.models.boardgame import *
+from app.models.ranking import Ranking
 
 
 if __name__ == "__main__":

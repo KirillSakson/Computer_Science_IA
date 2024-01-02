@@ -4,7 +4,7 @@
             <h5 class="card-title"><strong>{{bg.name}}</strong></h5>
             <p class="card-text"><strong>Players:</strong> {{bg.min_players}}-{{bg.max_players}} people</p>
             <p class="card-text"><strong>Description:</strong> {{bg.description}}</p>
-            <p class="card-text"><strong>Rank:</strong> {{bg.rank/bg.votes|round(1)}}</p>
+            <p class="card-text"><strong>Rank:</strong> {{bg.get_rank()}}</p>
             <a href="{{ url_for('boardgame_profile', boardgame_id=bg.id) }}" class="btn btn-primary stretched-link">View boardgame's profile</a>
         </div>
     </div>
