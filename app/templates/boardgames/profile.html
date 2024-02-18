@@ -5,9 +5,9 @@
         <h1 style="text-align: center">{{bg.name}}</h1>
         <h4>Players:</h4>
         <p class="fs-5">{{bg.min_players}}-{{bg.max_players}} people</p>
-        <h4>Short boardgame's description:</h4>
+        <h4>Short board game's description:</h4>
         <p class="fs-5">{{bg.description}}</p>
-        <h4>Full boardgame's description and its rules</h4>
+        <h4>Full board game's description and its rules</h4>
         {% for line in fd %}
             <p class="fs-5 lh-1">{{line}}</p>
         {% endfor %}
@@ -20,12 +20,12 @@
         {% endif %}
         <p></p>
         {% if bg.author == current_user %}
-            <a class="btn btn-outline-primary text-center" href="/edit_boardgame/{{bg.id}}">Edit boardgame's profile information</a>
+            <a class="btn btn-outline-primary text-center" href="/edit_boardgame/{{bg.id}}">Edit board game's profile information</a>
         {% endif %}
         <p></p>
         <div class="row g-3 align-items-center">
             <div class="col-auto">
-                <label for="ranking" class="col-form-label">Password</label>
+                <label for="ranking" class="col-form-label">Rank</label>
             </div>
             <div class="col-auto">
                 <form action="/rank_boardgame/" method="post">

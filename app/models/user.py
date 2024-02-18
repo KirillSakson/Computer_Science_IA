@@ -13,8 +13,8 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(100), nullable=False)
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
-    boardgames_created = db.relationship("BoardGame", backref="author")  # for my games
-    ranking_boardgames = db.relationship("Ranking", backref="users")
+    boardgames_created = db.relationship("BoardGame", backref="author")  # for created boardgames
+    ranking_boardgames = db.relationship("Ranking", backref="users")  # for ranking boardgames
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

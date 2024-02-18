@@ -8,6 +8,11 @@ from sqlalchemy import func
 
 
 def split_list(bgs):
+    """
+    Gets a list of boardgames and splits into sublists of 4
+    boardgames for representing them on the webpages
+    :param bgs: list of boardgames needed to split
+    """
     if len(bgs) == 0:
         return []
     n = ceil(len(bgs) / 4)
@@ -15,6 +20,7 @@ def split_list(bgs):
     for i in range(n):
         boardgames.append(bgs[4 * i:4 * i + 4])
     return boardgames
+
 
 @app.route("/")
 def about():
@@ -37,8 +43,8 @@ def favourite():
     bgs = current_user.favourite_boardgames
     boardgames = split_list(bgs)
     if not boardgames:
-        flash("There are no favourite boardgames yet", "warning")
-        return redirect(url_for("home"))
+        flash("There are no favourite board games yet", "warning")
+        return redirect(url_for("all_boardgames"))
     else:
         return render_template("home/favourite.html", boardgames=boardgames)
 
@@ -50,7 +56,7 @@ def all_boardgames():
     if order_query == "name":
         bgs = BoardGame.query.order_by(func.lower(BoardGame.name)).all()
     elif order_query == "date":
-        bgs = BoardGame.query.order_by(BoardGame.updated_on).all()
+        bgs = BoardGame.query.order_by(BoardGame.updated_on.desc()).all()
     elif order_query == "rank":
         bgs = BoardGame.query.all()
         bgs = sorted(bgs, key=lambda bg: bg.get_rank(), reverse=True)
@@ -58,7 +64,7 @@ def all_boardgames():
         bgs = BoardGame.query.all()
     boardgames = split_list(bgs)
     if not boardgames:
-        flash("There are no boardgames created yet", "warning")
+        flash("There are no board games created yet", "warning")
         return redirect(url_for("add_boardgame"))
     else:
         return render_template("home/allboardgames.html", boardgames=boardgames)
@@ -70,7 +76,7 @@ def my_boardgames():
     bgs = current_user.boardgames_created
     boardgames = split_list(bgs)
     if not boardgames:
-        flash("You still have not added any boardgame", "warning")
+        flash("You still have not added any board game", "warning")
         return redirect(url_for("add_boardgame"))
     else:
         return render_template("home/myboardgames.html", boardgames=boardgames)
@@ -91,7 +97,7 @@ def search():
                 bgs.append(bg)
     boardgames = split_list(bgs)
     if not boardgames:
-        flash("There are no boardgames that contain anything from the query", "danger")
+        flash("There are no board games that contain anything from the query", "danger")
         return redirect(url_for("home"))
     else:
         return render_template("home/search.html", boardgames=boardgames)

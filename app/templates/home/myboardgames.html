@@ -2,5 +2,14 @@
 {% from "macros.html" import show_bgs %}
 
 {% block app_content %}
+<div class="row" style="margin-top: 10px">
+        <div class="col-md-3 offset-md-4">
+            <h1 class="text-center">My board games</h1>
+        </div>
+        <div class="col-md-2 offset-md-3" style="padding: 0.7rem">
+            <a class="btn btn-outline-primary text-center" href="/add_boardgame">Add new board game</a>
+        </div>
+    </div>
     {{ show_bgs(boardgames) }}
+    <br>
 {% endblock %}

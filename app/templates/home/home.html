@@ -8,28 +8,38 @@
             <h1 class="text-center">Home</h1>
         </div>
         <div class="col-md-2 offset-md-3" style="padding: 0.7rem">
-            <a class="btn btn-outline-primary text-center" href="/add_boardgame">Add new boardgame</a>
+            <a class="btn btn-outline-primary text-center" href="/add_boardgame">Add new board game</a>
         </div>
     </div>
 
     <div class="container">
         <div class="row">
             <div class="col-md-4" style="padding-left: 50px; padding-right: 50px">
-                <h3 class="text-center">All boardgames</h3>
+                <h3 class="text-center">All board games</h3>
                 {% for bg in bgs1 %}
                     <div style="padding-bottom: 30px">
                         {{ represent_bg(bg) }}
                     </div>
                 {% endfor %}
+                <div class="container" style="text-align: center">
+                    <a class="btn btn-outline-primary text-center" href="/all_boardgames">All board games</a>
+                </div>
+                <br>
             </div>
+
             <div class="col-md-4" style="padding-left: 50px; padding-right: 50px">
-                <h3 class="text-center">Favourite boardgames</h3>
+                <h3 class="text-center">Favourite board games</h3>
                 {% for bg in bgs2 %}
                     <div style="padding-bottom: 30px">
                         {{ represent_bg(bg) }}
                     </div>
                 {% endfor %}
+                <div class="container" style="text-align: center">
+                    <a class="btn btn-outline-primary text-center" href="/favourite">Favourite board games</a>
+                </div>
+                <br>
             </div>
+
             <div class="col-md-4" style="padding-left: 50px; padding-right: 50px">
                 <h3 class="text-center">My games</h3>
                 {% for bg in bgs3 %}
@@ -37,6 +47,10 @@
                         {{ represent_bg(bg) }}
                     </div>
                 {% endfor %}
+                <div class="container" style="text-align: center">
+                    <a class="btn btn-outline-primary text-center" href="/my_boardgames">My board games</a>
+                </div>
+                <br>
             </div>
         </div>
     </div>

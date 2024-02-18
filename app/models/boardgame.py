@@ -19,8 +19,8 @@ class BoardGame(db.Model):
     full_description = db.Column(db.Text, nullable=False)
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
-    users = db.relationship("User", secondary=user_boardgames, backref="favourite_boardgames")  # for favourite boardgames
-    ranking_users = db.relationship("Ranking", backref="boardgames")
+    users = db.relationship("User", secondary=user_boardgames, backref="favourite_boardgames")  # for favourite board games
+    ranking_users = db.relationship("Ranking", backref="boardgames")  # for ranking board games
 
     def get_rank(self):
         sum, n = 0, 0

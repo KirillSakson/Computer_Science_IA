@@ -19,9 +19,9 @@ def add_boardgame():
         ranking = Ranking(user_id=current_user.id, boardgame_id=boardgame.id, rank=form.ranking.data)
         db.session.add(ranking)
         db.session.commit()
-        flash("Congratulations, you've just added a new boardgame successfully!", "success")
+        flash("Congratulations, you've just added a new board game successfully!", "success")
         return redirect(url_for("home"))
-    return render_template("boardgames/addboardgame.html", title="Adding new boardgame", form=form)
+    return render_template("boardgames/addboardgame.html", title="Adding new board game", form=form)
 
 
 @app.route("/edit_boardgame/<int:boardgame_id>/", methods=["get", "post"])
@@ -37,7 +37,7 @@ def edit_boardgame(boardgame_id):
             boardgame.description = form.description.data
             boardgame.full_description = form.full_description.data
             db.session.commit()
-            flash("Congratulations, you've just edited boardgame information successfully!", "success")
+            flash("Congratulations, you've just edited board game information successfully!", "success")
             return redirect(url_for("boardgame_profile", boardgame_id=boardgame_id))
         elif request.method == "GET":
             form.name.data = boardgame.name
@@ -45,9 +45,9 @@ def edit_boardgame(boardgame_id):
             form.max_players.data = boardgame.max_players
             form.description.data = boardgame.description
             form.full_description.data = boardgame.full_description
-        return render_template("boardgames/editboardgame.html", title="Editing boardgame information", form=form)
+        return render_template("boardgames/editboardgame.html", title="Editing board game information", form=form)
     else:
-        flash("You cannot edit this boardgame's information", "danger")
+        flash("You cannot edit this board game's information", "danger")
         return redirect(url_for("boardgame_profile", boardgame_id=boardgame_id))
 
 
@@ -56,7 +56,7 @@ def edit_boardgame(boardgame_id):
 def boardgame_profile(boardgame_id):
     boardgame = BoardGame.query.get(boardgame_id)
     if boardgame is None:
-        flash("Boardgame not found", "danger")
+        flash("Board game not found", "danger")
         return redirect(url_for("home"))
     full_description = boardgame.full_description.split("\n")
     return render_template("boardgames/profile.html", bg=boardgame, fd=full_description)
@@ -67,11 +67,11 @@ def boardgame_profile(boardgame_id):
 def add_to_favourite(bg_id):
     bg = BoardGame.query.get(bg_id)
     if bg is None:
-        flash("Boardgame not found", "danger")
+        flash("Board game not found", "danger")
         return redirect(url_for("boardgame_profile", boardgame_id=bg_id))
     current_user.favourite_boardgames.append(bg)
     db.session.commit()
-    flash("Boardgame added to favourite successfully", "success")
+    flash("Board game added to favourite successfully", "success")
     return redirect(url_for("boardgame_profile", boardgame_id=bg_id))
 
 
@@ -80,11 +80,11 @@ def add_to_favourite(bg_id):
 def remove_from_favourite(bg_id):
     bg = BoardGame.query.get(bg_id)
     if bg is None:
-        flash("Boardgame not found", "danger")
+        flash("Board game not found", "danger")
         return redirect(url_for("boardgame_profile", boardgame_id=bg_id))
     current_user.favourite_boardgames.remove(bg)
     db.session.commit()
-    flash("Boardgame removed from favourite successfully", "success")
+    flash("Board game removed from favourite successfully", "success")
     return redirect(url_for("boardgame_profile", boardgame_id=bg_id))
 
 

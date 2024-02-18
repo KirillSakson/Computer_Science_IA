@@ -4,12 +4,12 @@ from wtforms.validators import DataRequired, ValidationError
 
 
 class AddBoardgameForm(FlaskForm):
-    name = StringField("Boardgame's name", validators=[DataRequired()])
+    name = StringField("Board game's name", validators=[DataRequired()])
     min_players = IntegerField("Minimum possible players", validators=[DataRequired()])
     max_players = IntegerField("Maximum possible players", validators=[DataRequired()])
-    description = StringField("Short boardgame's description", validators=[DataRequired()])
-    full_description = TextAreaField("Full boardgame's description and its rules", validators=[DataRequired()])
-    ranking = IntegerField("Rate the boardgame (1-5)", validators=[DataRequired()])
+    description = StringField("Short board game's description", validators=[DataRequired()])
+    full_description = TextAreaField("Full board game's description and its rules", validators=[DataRequired()])
+    ranking = IntegerField("Rate the board game (1-5)", validators=[DataRequired()])
     submit = SubmitField("Done!")
 
     def get_min_players(self):
@@ -37,11 +37,11 @@ class AddBoardgameForm(FlaskForm):
 
 
 class EditBoardgameForm(FlaskForm):
-    name = StringField("Boardgame's name", validators=[DataRequired()])
+    name = StringField("Board game's name", validators=[DataRequired()])
     min_players = IntegerField("Minimum possible players", validators=[DataRequired()])
     max_players = IntegerField("Maximum possible players", validators=[DataRequired()])
-    description = StringField("Short boardgame's description", validators=[DataRequired()])
-    full_description = TextAreaField("Full boardgame's description and its rules", validators=[DataRequired()])
+    description = StringField("Short board game's description", validators=[DataRequired()])
+    full_description = TextAreaField("Full board game's description and its rules", validators=[DataRequired()])
     submit = SubmitField("Done!")
 
     def get_min_players(self):
